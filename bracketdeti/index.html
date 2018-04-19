@@ -2,6 +2,52 @@
 <html><head><meta charset="UTF-8">
 <title>D3T1 SH0W</title>
 <link rel="icon" type="image/png" href="imgs/favicon.png">
+<style type="text/css">
+	
+body{
+	background-color: white;
+}
+
+	.btn {
+		
+
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+.btn:hover {background-color: #3e8e41}
+
+.btn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+
+
+}
+#box1 {
+
+  width:10px;
+  height:10px;
+  border-width: 2px;
+  margin-top: 900px;
+}
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <script>
 function validateForm() {
     if (document.forms['f']["email"].value == '') {
@@ -46,14 +92,39 @@ function clickedOn(idnum,childnum) {
 //		console.log(passer);
 	}
 }
+
+function genScreenshot() {
+    html2canvas(document.body, {
+      onrendered: function(canvas) {
+      // $('#box1').html("");
+			// $('#box1').append(canvas);
+      
+      if (navigator.userAgent.indexOf("MSIE ") > 0 || 
+					navigator.userAgent.match(/Trident.*rv\:11\./)) 
+			{
+      	var blob = canvas.msToBlob();
+        window.navigator.msSaveBlob(blob,'Test file.png');
+      }
+      else {
+        $('#test').attr('href', canvas.toDataURL("image/png"));
+        $('#test').attr('download','bracket.png');
+        $('#test')[0].click();
+      }
+      
+      
+      }
+    });
+}
 </script>
 </head><body>
-<b id="clicktext" style="position:absolute;left:10px;top:10px;color:black;font-family:sans-serif;visibility:visible">Quem é o mais TOP? DETI VERSION</b>
-</b>
+
+<b id="clicktext" style="left:10px;top:10px;color:black;font-family:sans-serif;visibility:visible">Quem é o mais TOP, DETI?</b>
+<button class="btn" onclick="genScreenshot()">Salvar</button>
 <br>
 <br>
-<div style="top:100px;">
-<img src="./imgs/brackett.png"   style="position:absolute;top:59px;left:0px;">
+<a id="test"></a>
+<div  id="text" style="top:100px;">
+<img src="./imgs/brackett.png"   style="position:absolute;top:59px;left:10px;">
 <img src="./imgs/logoSMD.png" width="224" style="position:absolute;top:20px;left:980px;margin-bottom:200px;">
 
 			<a href="javascript:void(0)" onclick="clickedOn(41,53)"><img id="img41" src="./imgs/pixel.png" width="120" height="42" style="position:absolute;top:501px;left:195px"></a>
@@ -99,7 +170,7 @@ function clickedOn(idnum,childnum) {
 			</a>
 			<a href="javascript:void(0)" onclick="clickedOn(12,38)"><img id="img12" src="./imgs/12.png"    height="50" style="position:absolute;top:675px;left:30px">
 			</a>
-			<a href="javascript:void(0)" onclick="clickedOn(13,39)"><img id="img13" src="./imgs/13.png"    height="50" style="position:absolute;top:735px;left:30px">
+			<a href="javascript:void(0)" onclick="clickedOn(13,39)"><img id="img13" src="./imgs/13.png"    height="50" style="position:absolute;top:745px;left:30px">
 			</a>
 			<a href="javascript:void(0)" onclick="clickedOn(14,39)"><img id="img14" src="./imgs/14.png"    height="50" style="position:absolute;top:785px;left:30px">
 			</a>
@@ -141,6 +212,6 @@ function clickedOn(idnum,childnum) {
 			<img id="img61" src="./imgs/pixel.png" height="200" style="position:absolute;top:390px;left:1040px">
 			
 			
-	</div>	
-
+</div>	
+<div id="box1"></div>
 </body></html>
